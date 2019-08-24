@@ -102,3 +102,11 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# vim
+*.swp
+
+# Python Virtual Env
+bin/
+pyvenv.cfg
+
