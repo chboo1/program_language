@@ -5,7 +5,7 @@ class Parser():
 		self.pg = ParserGenerator(
 		# A list of all token names accepted by the parser.
 		['NOMBRE', 'MON', 'PARENTESE1', 'PARENTESE2',
-		'POINT_VERG', 'PLUS', 'MOINS']
+		'POINT_VERG', 'PLUS', 'MOINS', 'FOIS', 'DIVI', 'TERM']
 		)
 	def parse(self):
 		@self.pg.production('expression : NOMBRE')
@@ -25,6 +25,20 @@ class Parser():
 		def parentese(p):
 			ex=p[1]
 			return ex
-
+		@self.pg.production('expression : expression FOIS expression')
+		def fois(p):
+			left=p[0]
+			right=p[2]
+			return Times(left, right)
+		@self.pg.production('expression : expression DIVI expression')
+		def diviser(p):
+			left=p[0]
+			right=p[2]
+			return Divide(left, right)
+		@self.pg.production('print : MON expression POINT_VERG')
+		def montrer(p):
+			write=p[1]
+			return Montrer(write)
 	def get_parser(self):
 		return self.pg.build()
+ 

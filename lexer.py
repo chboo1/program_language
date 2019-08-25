@@ -19,7 +19,9 @@ class Lexer():
         self.lexer.add('NOMBRE', r'\d+')
         # Ignore spaces
         self.lexer.ignore('\s+')
-
+        self.lexer.add('FOIS', r'\*')
+        self.lexer.add('DIVI', r'\/')
+        self.lexer.add('TERM', r'[a-zA-Z]+')
     def get_lexer(self):
         self._add_tokens()
         return self.lexer.build()

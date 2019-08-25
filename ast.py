@@ -18,3 +18,15 @@ class Sum(BinaryOp):
 class Sub(BinaryOp):
 	def eval(self):
 		return self.left.eval() - self.right.eval()
+class Times(BinaryOp):
+	def eval(self):
+		return self.left.eval() * self.right.eval()
+class Divide(BinaryOp):
+	def eval(self):
+		return self.left.eval() / self.right.eval()
+class Montrer():
+	def __init__(self, text):
+		self.text=text
+	def eval(self):
+		return self.text
+	
