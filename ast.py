@@ -40,9 +40,3 @@ class Montrer():
 		self.text=text
 	def eval(self):
 		return self.text
-class String():
-	def __init__(self, value):
-		self.value=value
-	def eval(self):
-		print(self.value)
-		return
