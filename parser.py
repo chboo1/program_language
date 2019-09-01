@@ -8,6 +8,11 @@ class Parser():
 		'POINT_VERG', 'PLUS', 'MOINS', 'FOIS', 'DIVI', 'TERM']
 		)
 	def parse(self):
+		@self.pg.production('language : print')
+		@self.pg.production('language : expression')
+		def lanexp(p):
+			hmm=p[0]
+			return hmm
 		@self.pg.production('expression : NOMBRE')
 		def number(p):
 			return Number(p[0].value)
@@ -35,9 +40,9 @@ class Parser():
 			left=p[0]
 			right=p[2]
 			return Divide(left, right)
-		@self.pg.production('print : MON expression POINT_VERG')
+		@self.pg.production('print : MON TERM POINT_VERG')
 		def montrer(p):
-			write=p[1]
+			write=p[1].value
 			return Montrer(write)
 	def get_parser(self):
 		return self.pg.build()

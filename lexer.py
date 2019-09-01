@@ -21,7 +21,7 @@ class Lexer():
         self.lexer.ignore('\s+')
         self.lexer.add('FOIS', r'\*')
         self.lexer.add('DIVI', r'\/')
-        self.lexer.add('TERM', r'[a-zA-Z]+')
+        self.lexer.add('TERM', r'[a-zA-Z0-9]+')
     def get_lexer(self):
         self._add_tokens()
         return self.lexer.build()

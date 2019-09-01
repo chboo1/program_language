@@ -4,6 +4,8 @@ class Number():
 		self.value = value
 	def eval(self):
 		return int(self.value)
+	def __repr__(self):
+		return 'Number({})'.format(self.value)
 
 
 class BinaryOp():
@@ -15,12 +17,21 @@ class BinaryOp():
 class Sum(BinaryOp):
 	def eval(self):
 		return self.left.eval() + self.right.eval()
+	def __repr__(self):
+		return 'Sum({},{})'.format(self.left, self.right)
+
 class Sub(BinaryOp):
 	def eval(self):
 		return self.left.eval() - self.right.eval()
+	def __repr__(self):
+		return 'Sub({},{})'.format(self.left, self.right)
+
 class Times(BinaryOp):
 	def eval(self):
 		return self.left.eval() * self.right.eval()
+	def __repr__(self):
+		return 'Times({},{})'.format(self.left, self.right)
+
 class Divide(BinaryOp):
 	def eval(self):
 		return self.left.eval() / self.right.eval()
@@ -29,4 +40,9 @@ class Montrer():
 		self.text=text
 	def eval(self):
 		return self.text
-	
+class String():
+	def __init__(self, value):
+		self.value=value
+	def eval(self):
+		print(self.value)
+		return
