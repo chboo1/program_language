@@ -1,18 +1,32 @@
 from rply import ParserGenerator
 from ast import *
+d={}
 class Parser():
 	def __init__(self):
 		self.pg = ParserGenerator(
 		# A list of all token names accepted by the parser.
 		['NOMBRE', 'MON', 'PARENTESE1', 'PARENTESE2',
-		'POINT_VERG', 'PLUS', 'MOINS', 'FOIS', 'DIVI', 'TERM']
+		'POINT_VERG', 'PLUS', 'MOINS', 'FOIS', 'DIVI', 'TERM', 'EGAL']
 		)
 	def parse(self):
+		@self.pg.production('language : string')
+		@self.pg.production('language : variable')
 		@self.pg.production('language : print')
 		@self.pg.production('language : expression')
 		def lanexp(p):
 			hmm=p[0]
 			return hmm
+		@self.pg.production('string : TERM')
+		def string(p):
+			val=p[0].value
+			return val
+		@self.pg.production('variable : string EGAL string')
+		@self.pg.production('variable : string EGAL expression')
+		def variable(p):
+				lhs=p[0]
+				rhs=p[2]
+				d[lhs]=rhs
+				return NoOp()
 		@self.pg.production('expression : NOMBRE')
 		def number(p):
 			return Number(p[0].value)
@@ -20,7 +34,7 @@ class Parser():
 		def plus(p):
 			left=p[0]
 			right=p[2]
-			return Sum(left, right) 
+			return Sum(left, right)
 		@self.pg.production('expression : expression MOINS expression')
 		def moins(p):
 			left=p[0]
@@ -40,10 +54,9 @@ class Parser():
 			left=p[0]
 			right=p[2]
 			return Divide(left, right)
-		@self.pg.production('print : MON TERM POINT_VERG')
+		@self.pg.production('print : MON string POINT_VERG')
 		def montrer(p):
-			write=p[1].value
+			write=p[1]
 			return Montrer(write)
 	def get_parser(self):
 		return self.pg.build()
- 

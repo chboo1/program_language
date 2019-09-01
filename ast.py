@@ -40,3 +40,7 @@ class Montrer():
 		self.text=text
 	def eval(self):
 		return self.text
+
+class NoOp():
+	def eval(self):
+		return

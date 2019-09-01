@@ -18,11 +18,11 @@ while True:
         tokens = lexer.lex(line)
         arbre = parser.parse(tokens)
         resultat = arbre.eval()
-        print (resultat)
+        if resultat:
+            print (resultat)
 
     except LexingError as e:
         idx = e.source_pos.idx
         stdout.write(' ' * (idx+2))
         stdout.write('^\n')
         print('Erreur:', e)
-
