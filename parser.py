@@ -6,7 +6,7 @@ class Parser():
 		self.pg = ParserGenerator(
 		# A list of all token names accepted by the parser.
 		['NOMBRE', 'MON', 'PARENTESE1', 'PARENTESE2',
-		'POINT_VERG', 'PLUS', 'MOINS', 'FOIS', 'DIVI', 'TERM', 'EGAL']
+		'POINT_VERG', 'PLUS', 'MOINS', 'FOIS', 'DIVI', 'TERM', 'EGAL', 'QUOTE']
 		)
 	def parse(self):
 		@self.pg.production('language : string')
@@ -54,9 +54,14 @@ class Parser():
 			left=p[0]
 			right=p[2]
 			return Divide(left, right)
-		@self.pg.production('print : MON string POINT_VERG')
+		@self.pg.production('print : MON PARENTESE1 QUOTE string QUOTE PARENTESE2')
 		def montrer(p):
-			write=p[1]
+			write=p[3]
 			return Montrer(write)
+		@self.pg.production('print : MON PARENTESE1 string PARENTESE2')
+		def print2(p):
+				wie=p[2]
+				write2=d.get(wie)
+				return Montrer(write2)
 	def get_parser(self):
 		return self.pg.build()
