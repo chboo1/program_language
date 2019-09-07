@@ -24,6 +24,8 @@ class Lexer():
         self.lexer.add('TERM', r'[a-zA-Z0-9]+')
         self.lexer.add('EGAL', r'\=+')
         self.lexer.add('QUOTE', r'\'')
+        self.lexer.add('VERGULE', r',')
+        self.lexer.add('DOLLAR', r'\$')
     def get_lexer(self):
         self._add_tokens()
         return self.lexer.build()

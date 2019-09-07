@@ -44,3 +44,9 @@ class Montrer():
 class NoOp():
 	def eval(self):
 		return
+class AC():
+	def __init__(self, left, right):
+		self.left=left
+		self.right=right
+	def eval(self):
+		return self.left + self.right
